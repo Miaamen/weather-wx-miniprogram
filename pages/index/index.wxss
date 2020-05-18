@@ -1,0 +1,408 @@
+.container{
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: rgb(222, 221, 240);
+}
+
+/*现在天气情况展示面*/
+.weather{
+  box-sizing: border-box;
+  margin: 10px 10px 0 10px;
+  width: calc(100% - 20px);
+  height: 60%;
+  border-radius: 10px;
+  background: rgb(197, 197, 223);
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+
+.condition{
+  font-size: 1.5em;
+  font-weight: 600;
+  padding: 50rpx 0 20rpx 0;
+}
+
+.location{
+  font-size: 1.1em;
+  font-weight: 400;
+  padding-bottom: 30rpx;
+}
+
+.location image{
+  width: 35rpx;
+  height: auto;
+}
+
+.temperature{
+  padding-left: 13px;
+  font-size: 3em;
+  font-weight: 500;
+}
+
+.icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  flex: 1;
+  padding-bottom: 10px;
+}
+
+.icon image{
+   display: inline-block;
+  line-height: 100%;
+  width: 110px;
+  height: 110px;
+}
+
+/*晴天*/
+.sun{
+  display: inline-block;
+  line-height: 100%;
+  width: 60px;
+  height: 60px;
+  background: #fcf4d9;
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
+}
+
+.sun::after{
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  z-index: 1;
+  background: #fcf4d9;
+  opacity: 0.3;
+  animation: sun 4s linear infinite;
+}
+
+@keyframes sun {
+	0%,100% { 
+    opacity: 0.3;
+ }
+	50% { 
+    opacity: 0.5;
+  }
+}
+
+
+/*晴天的夜晚*/
+.moon{
+  display: inline-block;
+  line-height: 100%;
+  width: 90px;
+  height: 90px;
+  background: #fcf4d9;
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
+}
+
+.moon::after{
+  content: '';
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  position: absolute;
+  background: rgb(197, 197, 223);
+}
+
+/*多云*/
+.cloud{
+	border-radius: 25px;
+	position: absolute;
+	top: 55%;
+	left: 50%;
+  transform: translate(-50%,-50%);
+	width: 140px;
+	height: 40px;
+	background: rgb(240, 239, 239);
+}
+
+.otherCloud{
+  left: 200px;
+	width: 100px;
+	height: 30px;
+  border-radius: 15px;
+	background: rgb(240, 239, 239);
+	opacity: 1;
+  transform: translateX(80%);
+	animation: cloud 8s linear infinite;
+}
+
+.cloud::after,.cloud::before{
+	content: '';
+	display: block;
+	background: rgb(240, 239, 239);
+	border-radius: 50%;
+	position: absolute;
+}
+
+.cloud::after{
+	width: 75px;
+	height: 75px;
+	left: 45px;
+	top: -45px;
+}
+			
+.cloud::before{
+	width: 50px;
+	height: 50px;
+	top: -10px;
+	left: 0;
+}
+
+.otherCloud::after,.otherCloud::before{
+	content: '';
+	display: block;
+	background: rgb(240, 239, 239);
+	border-radius: 50%;
+	position: absolute;
+}	
+
+.otherCloud::after{
+	width: 50px;
+	height: 50px;
+	left: 35px;
+	top: -30px;
+}
+			
+.otherCloud::before{
+	width: 40px;
+	height: 40px;
+	top: -10px;
+	left: 0px;
+}
+			
+@keyframes cloud {
+	0% { opacity: 0; }
+	50% { opacity: 1; }
+	100% {
+		opacity: 0;
+		transform: scale(0.8) translateX(-80%);
+	}
+}
+
+/*下雨天*/
+.rainCloud{
+	border-radius: 25px;
+	position: absolute;
+	top: 55%;
+	left: 50%;
+  transform: translate(-50%,-50%);
+	width: 100px;
+	height: 30px;
+	background: rgb(240, 239, 239);
+}
+
+.rainCloud::after,.rainCloud::before{
+	content: '';
+	display: block;
+	background: rgb(240, 239, 239);
+	border-radius: 50%;
+	position: absolute;
+}
+
+.rainCloud::after{
+	width: 60px;
+	height: 60px;
+	left: 35px;
+	top: -35px;
+}
+			
+.rainCloud::before{
+	width: 40px;
+	height: 40px;
+	top: -10px;
+	left: 0;
+}
+
+.rain-string{
+	width: 4px;
+	height: 20px;
+	background:linear-gradient(transparent,#fff);
+	position: absolute;
+	left: 20px;
+	top: 30px;
+	border-radius: 2px;
+	animation: rainning 2s infinite;
+}
+			
+.rain-string:nth-child(2){
+	height: 10px;
+	left: 35px;
+	top: 25px;
+}
+			
+.rain-string:nth-child(3){
+	height: 20px;
+	left: 60px;
+	top: 30px;
+}
+			
+.rain-string:nth-child(4){
+	height: 15px;
+	left: 80px;
+	top: 25px;
+}
+			
+@keyframes rainning{
+	100%{
+		top: 40px;
+	}
+}
+
+.forecast{
+  width: 100%;
+  height: 40%;
+}
+
+
+/*预报导航*/
+.chooseDay{
+  width: 100%;
+  height: 25%;
+  background: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.oneTap,.twoTap{
+  box-sizing: border-box;
+  display: flex;
+  height: 100%;
+  width: 35%;
+  align-items: center;
+  justify-content: center;
+  color: #cfcece8f;
+  font-weight: 600;
+}
+
+.isDay{
+  border-bottom: 1px solid #8f8f8f;
+  color: #8f8f8f;
+}
+
+/*scroll块*/
+.hour-temp{
+  background: #fff;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+
+.sevenDay{
+  box-sizing: border-box;
+  margin: 10px 10px 0 10px;
+  width: calc(100% - 20px);
+  border-radius: 10px;
+  border: 2px dashed rgb(222, 221, 240);
+  padding-bottom: 10px;
+}
+
+.hour{
+  box-sizing: border-box;
+  display: inline-block;
+  background: #fff;
+  padding: 4%;
+  border: 1px solid #ccc;
+  color: #333;
+}
+
+.now-time{
+  padding: 5%;
+}
+
+.hourly_item {
+  margin: 10px 0;
+  display: inline-block;
+  text-align: center;
+  font-size: 28rpx;
+}
+
+.hourly_icon {
+  margin: 30rpx 0;
+}
+
+.otherMsgImg {
+  margin-top: 30rpx;
+  margin-bottom: 10rpx;
+}
+
+.hourly_icon image,.msgSpan .otherMsgImg image{
+  width: 60rpx;
+  height: auto;
+}
+
+.hourly_item text {
+  display: block;
+}
+
+.hourly_time, .hourly_temp{
+  color: #333;
+}
+
+/*其他信息*/
+.otherMsg{
+  box-sizing: border-box;
+  margin: 10px 10px 0 10px;
+  width: calc(100% - 20px);
+  border-radius: 10px;
+  border: 2px dashed rgb(222, 221, 240);
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.msgSpan{
+  box-sizing: border-box;
+  width: calc(100% / 3);
+}
+
+.msgSpan:nth-child(1),.msgSpan:nth-child(2),.msgSpan:nth-child(3){
+ border-bottom: 1px dashed rgb(222, 221, 240);
+}
+
+.msgSpan:nth-child(1),.msgSpan:nth-child(2),.msgSpan:nth-child(4),.msgSpan:nth-child(5){
+ border-right: 1px dashed rgb(222, 221, 240);
+}
+
+.otherMsgTitle{
+  font-size: 0.8em;
+  color: #ccc;
+}
+
+.otherMsgDec{
+  margin: 30rpx 0 30rpx 0;
+  color: rgb(97, 97, 97);
+}
+
+.hi {
+  box-sizing: border-box;
+  margin: 10px 10px 0 10px;
+  width: calc(100% - 20px);
+  height: 400rpx;
+  padding: 10px 0 0 0;
+  border-radius: 10px;
+  border: 2px dashed rgb(222, 221, 240);
+  margin-bottom: 10px;
+}
+
+.scroll-title{
+  font-size: 12px;
+  color: #8f8f8f;
+  padding: 10px 0 5px 0;
+}
+

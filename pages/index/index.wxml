@@ -1,0 +1,106 @@
+<!--index.wxml-->
+<view class="container" style="height: {{ height }}">
+  <view class="weather">
+    <view class="condition">{{ cond }}</view>
+    <view class="location" bindtap="changePosition">{{ city }}<image mode="widthFix" src="../../img/otherMsg/position.png"></image></view>
+    <view class="temperature">{{ temp }}°</view>
+    <view class="icon">
+      <view wx:if="{{condCode === 100 && time < 19 }}" class="sun"></view>
+      <view wx:if="{{condCode === 100 && time >= 19 }}" class="moon"></view>
+      <view wx:if="{{condCode === 101 || condCode === 102 || condCode === 104 }}" class="cloud">
+        <view class="otherCloud"></view>
+      </view>
+
+      <view wx:if="{{ (condCode >= 305 && condCode <= 399) || condCode === 300 || condCode === 301}}" class="rainCloud">
+				<view class="rain-string"></view>
+				<view class="rain-string"></view>
+				<view class="rain-string"></view>
+				<view class="rain-string"></view>
+			</view>
+
+      <view wx:if="{{ (condCode === 103) || condCode === 900 || condCode === 901 || condCode === 999 || (condCode >= 500 && condCode <= 515) || (condCode >= 302 && condCode <= 304) || (condCode >= 200 && condCode <= 213) || (condCode >= 400 && condCode <= 499) }}" class="hot">
+        <image mode='widthFix' src="../../img/cond-icon-heweather/{{ condCode }}.png"></image>
+      </view>
+
+    </view>
+  </view>
+
+ <view class="forecast">
+    <!--<view class="chooseDay">
+      <view data-day="24时预报" class="oneTap {{day === '24时预报' ? 'isDay' : ''}}" bindtap="changeDays">{{ oneTap }}</view>
+      <view data-day="7日预报" class="twoTap {{day === '7日预报' ? 'isDay' : ''}}" bindtap="changeDays">{{ twoTap }}</view>
+    </view>
+-->
+
+    <view class="sevenDay">
+      <view class="scroll-title">未来七日天气预报</view>
+      <scroll-view scroll-x="true" style=" white-space: nowrap; display: flex; " class="hour-temp">
+        <!--<view wx:if="{{ day === '24时预报' }}" class="hourly_item" wx:for="{{ hourly }}" wx:key="index" style="width: {{ width }}; ">
+          <text class="hourly_time">{{item.time}}</text>
+          <view class="hourly_icon">
+            <image mode='widthFix' src="../../img/cond-icon-heweather/{{ item.imgsrc }}.png"></image>
+          </view>
+          <text class="hourly_temp">{{item.temp}}°</text>
+        </view>
+  --> 
+        
+        <view class="hourly_item" wx:for="{{ daily_forecast }}" wx:key="index" style="width: {{ width }}; ">
+          <text class="hourly_time">{{ item.d_date }}</text>
+          <view class="hourly_icon">
+            <image mode="widthFix" src="../../img/cond-icon-heweather/{{ item.imgsrc }}.png"></image>
+          </view>
+          <text class="hourly_temp">{{ item.minTemp }}° ~ {{ item.maxTemp }}°</text>
+        </view>
+      </scroll-view>
+    </view>
+
+    <view class="hi">
+      <ec-canvas force-use-old-canvas="true" class="ec" ec="{{ ec }}"></ec-canvas>
+    </view>
+
+    <view class="otherMsg">
+      <view class="msgSpan">
+        <view class="otherMsgImg">
+          <image mode="widthFix" src="../../img/otherMsg/sunRaise.png"></image>
+        </view>
+        <text class="otherMsgTitle">{{ sunRaise }}</text>
+        <view class="otherMsgDec">{{ sunRaiseTime }}</view>
+      </view>
+      <view class="msgSpan">
+        <view class="otherMsgImg">
+          <image mode="widthFix" src="../../img/otherMsg/hum.png"></image>
+        </view>
+        <text class="otherMsgTitle">{{ humidity }}</text>
+        <view class="otherMsgDec">{{ humNum }}</view>
+      </view>
+      <view class="msgSpan">
+        <view class="otherMsgImg">
+          <image mode="widthFix" src="../../img/otherMsg/cloths.png"></image>
+        </view>
+        <text class="otherMsgTitle">{{ cloths }}</text>
+        <view class="otherMsgDec">{{ clothsText }}</view>
+      </view>
+      <view class="msgSpan">
+        <view class="otherMsgImg">
+          <image mode="widthFix" src="../../img/otherMsg/sunDown.png"></image>
+        </view>
+        <text class="otherMsgTitle">{{ sunDown }}</text>
+        <view class="otherMsgDec">{{ sunDownTime }}</view>
+      </view>
+      <view class="msgSpan">
+        <view class="otherMsgImg">
+          <image mode="widthFix" src="../../img/otherMsg/wind.png"></image>
+        </view>
+        <text class="otherMsgTitle">{{ wind }}</text>
+        <view class="otherMsgDec">{{ windNum }}</view>
+      </view>
+      <view class="msgSpan">
+        <view class="otherMsgImg">
+          <image mode="widthFix" src="../../img/otherMsg/cold.png"></image>
+        </view>
+        <text class="otherMsgTitle">{{ cold }}</text>
+        <view class="otherMsgDec">{{ coldText }}</view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,47 @@
+<!--index.wxml-->
+ <view class="title">
+  <image src="../../img/select.png"></image><input class="title_list" value="{{cityName}}" placeholder="请输入城市名，快速查询天气信息" bindinput="handleInput" />
+</view>
+<scroll-view   scroll-y="true" style="height: {{winHeight}}px;" scroll-into-view="{{scrollTopId}}" class="city_list">
+    <block>
+      <text class="list_tit">当前城市</text>
+      <view class="list_con" data-city="{{ currCity }}" bindtap="bindCity">{{ currCity }}</view>
+    </block>
+    <block>
+      <text class="list_tit">热门城市</text>
+      <view class="list_con" data-city="北京" bindtap="bindCity">北京</view>
+      <view class="list_con" data-city="上海" bindtap="bindCity">上海</view>
+      <view class="list_con" data-city="广州" bindtap="bindCity">广州</view>
+      <view class="list_con" data-city="深圳" bindtap="bindCity">深圳</view>
+      <view class="list_con" data-city="杭州" bindtap="bindCity">杭州</view>
+    </block>
+    <block wx:for="{{city}}" wx:for-index="idx" wx:for-item="cityName">
+      <text id="{{idx}}" class="list_tit">{{idx}}</text>
+      <block wx:for="{{cityName}}">
+         <view class="list_con" data-city="{{item.name}}" bindtap="bindCity">{{item.name}}</view>
+      </block>
+    </block>
+</scroll-view>
+<!--城市选择列表-->
+<view  class="scroll_list" 
+      bindtouchstart="chStart"
+      bindtouchend="chEnd"
+      catchtouchmove="chMove"
+      style="background: rgba(0,0,0,{{trans}});"
+      >
+    <block wx:for="{{city}}" wx:for-index="idx" wx:for-item="cityName">
+      <block>
+       <view id="{{idx}}" class="scroll_list_chi" style="line-height:{{lineHeight}}px ; height:{{lineHeight}}px ;font-size:{{lineHeight/1.7}}px;" bindtouchstart="getWords" bindtouchend="setWords">{{idx}}</view>
+      </block>
+    </block>
+</view>
+
+<!--选择显示-->
+<view class="search-content" hidden="{{!isShow}}">
+  <scroll-view scroll-y style="height:100%;">
+    <view class="list_con" data-city="{{item.name}}" bindtap="bindCity" wx:for="{{searchCitys}}" wx:key="{{index}}">
+      <text>{{item.name}}</text>
+    </view>
+    <view class="NotMsg" wx:if="{{!searchCitys.length}}">没有匹配数据</view>
+  </scroll-view>
+</view>
