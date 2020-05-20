@@ -1,5 +1,6 @@
 //先引用城市数据文件
 var city = require('../../utils/city.js');
+var latitudeAndLongitude = require('../index/index.js');
 
 var lineHeight = 0;
 var endWords = "";
@@ -13,7 +14,8 @@ Page({
   },
   onLoad: function (options) {
     // 生命周期函数--监听页面加载3
-    this.getLocation();
+    //console.log('经度：' + latitudeAndLongitude.latitude)
+    this.getCity(latitudeAndLongitude.latitude,latitudeAndLongitude.longitude);
   },
   onReady: function () {
     // 生命周期函数--监听页面初次渲染完成
@@ -158,22 +160,7 @@ Page({
       searchCitys: list  // 赋值
     })
   },
-  getLocation: function () {
-    var that = this;
-    wx.getLocation({
-      type: '',
-      altitude: true,
-      success: function (res) {
-        var latitude = res.latitude;
-        var longitude = res.longitude;
-        that.getCity(latitude, longitude);
-      },
-      fail: function (res) {
-        alert('获取地理位置失败，请重新打开')
-      }
-    })
-  },
-  //获取城市信息
+  //获取当前城市城市信息
   getCity: function (latitude, longitude) {
     var that = this
     var url = "https://api.map.baidu.com/reverse_geocoding/v3/";

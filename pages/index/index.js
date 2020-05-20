@@ -169,6 +169,9 @@ Page({
         var latitude = res.latitude;
         var longitude = res.longitude;
         that.getCity(latitude,longitude);
+        exports.latitude = latitude;
+        exports.longitude = longitude;
+        exports.getCity = getCity;
       },
       fail: function(res) {
         alert('获取地理位置失败，请重新打开')
